@@ -12,9 +12,15 @@
 lua_State* L = NULL;
 static void load_main_lua()
 {
+	char path[256] = {0};
+	GetModuleFileName(NULL,path,256);
+	char* left = strrchr(path,'\\');
+	*++left = '\0';
+	strcat(path,"main.lua");
+	TRACE_OUT("%s\n",path);
 	L = lua_open();
 	luaL_openlibs(L);
-	if(luaL_dofile(L,"main.lua") != 0){
+	if(luaL_dofile(L,path) != 0){
 		lua_pop(L,1);
 		lua_close(L);
 		TRACE_OUT("load main.lua error!\n");
