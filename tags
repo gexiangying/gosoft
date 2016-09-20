@@ -4,43 +4,44 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-Base64Date6	gsoft.c	/^struct Base64Date6$/;"	s	file:
-ConvertToBase64	gsoft.c	/^char ConvertToBase64(char uc)$/;"	f
-EncodeBase64	gsoft.c	/^void EncodeBase64(char *dbuf, char *buf128, int len)$/;"	f
-L	gsoft.c	/^lua_State* L = NULL;$/;"	v
+L	gsoft.c	/^static lua_State* L = NULL;$/;"	v	file:
 MAX_PIPE_BUF	spawn.c	6;"	d	file:
-OpenSocket	gsoft.c	/^int OpenSocket(struct sockaddr *addr)$/;"	f
 SPAWN_PIPE	spawn.h	/^typedef struct _spawn_pipe_* SPAWN_PIPE;$/;"	t	typeref:struct:_spawn_pipe_
-SendMail	gsoft.c	/^void SendMail(char *email, char *body,char* smtp,char* user,char* password)$/;"	f
 WinMain	gsoft.c	/^int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, \/\/ $/;"	f
+_G_LUA_H_	g_lua.h	2;"	d
 _SPAWN_H_	spawn.h	2;"	d
 _spawn_pipe_	spawn.c	/^struct _spawn_pipe_$/;"	s	file:
 buf	spawn.c	/^	char buf[MAX_PIPE_BUF];$/;"	m	struct:_spawn_pipe_	file:
-close_sock	gsoft.c	/^int close_sock(SOCKET* sock)$/;"	f
+call_lua	g_lua.c	/^void call_lua(lua_State* L,const char* func,const char* sig,...){$/;"	f
+close_socket	gsoft.c	/^static int close_socket(lua_State* L)$/;"	f	file:
 create_child	spawn.c	/^static int create_child(const char* cmd,SPAWN_PIPE pipes)$/;"	f	file:
 create_spawnpipe	spawn.c	/^SPAWN_PIPE create_spawnpipe()$/;"	f
 cur_	spawn.c	/^	int cur_;$/;"	m	struct:_spawn_pipe_	file:
-d1	gsoft.c	/^  unsigned int d1:6;$/;"	m	struct:Base64Date6	file:
-d2	gsoft.c	/^  unsigned int d2:6;$/;"	m	struct:Base64Date6	file:
-d3	gsoft.c	/^  unsigned int d3:6;$/;"	m	struct:Base64Date6	file:
-d4	gsoft.c	/^  unsigned int d4:6;$/;"	m	struct:Base64Date6	file:
 dup_pipes	spawn.c	/^static int dup_pipes(SPAWN_PIPE pipes)$/;"	f	file:
+error	g_lua.c	/^void error(lua_State* L,const char* fmt,...)$/;"	f
 free_spawnpipe	spawn.c	/^void free_spawnpipe(SPAWN_PIPE pipes)$/;"	f
 get_char	spawn.c	/^static int get_char(SPAWN_PIPE pipes)$/;"	f	file:
 get_imp	spawn.c	/^static int get_imp(HANDLE in,char* buf,int max,int* cur)$/;"	f	file:
 get_line	spawn.c	/^static char* get_line(SPAWN_PIPE pipes,char* buf,int lim)$/;"	f	file:
 in	spawn.c	/^	HANDLE in;$/;"	m	struct:_spawn_pipe_	file:
 load_main_lua	gsoft.c	/^static void load_main_lua()$/;"	f	file:
+lua_new_pipe	spawn.c	/^static int lua_new_pipe(lua_State* L)$/;"	f	file:
+lua_open_api	gsoft.c	/^static void lua_open_api(lua_State* L)$/;"	f	file:
+lua_pipe_closein	spawn.c	/^static int lua_pipe_closein(lua_State* L)$/;"	f	file:
+lua_pipe_closeout	spawn.c	/^static int lua_pipe_closeout(lua_State* L)$/;"	f	file:
+lua_pipe_getline	spawn.c	/^static int lua_pipe_getline(lua_State* L)$/;"	f	file:
+lua_pipe_print	spawn.c	/^static int lua_pipe_print(lua_State* L)$/;"	f	file:
+luaopen_luaext_pipe	spawn.c	/^int luaopen_luaext_pipe(lua_State* L){$/;"	f
+luapipe_f	spawn.c	/^static const struct luaL_Reg luapipe_f[] = {$/;"	v	typeref:struct:luaL_Reg	file:
+luapipe_m	spawn.c	/^static const struct luaL_Reg luapipe_m[] = {$/;"	v	typeref:struct:luaL_Reg	file:
 out	spawn.c	/^	HANDLE out;$/;"	m	struct:_spawn_pipe_	file:
 pipe_closein	spawn.c	/^void pipe_closein(SPAWN_PIPE pipes)$/;"	f
 pipe_closeout	spawn.c	/^void pipe_closeout(SPAWN_PIPE pipes)$/;"	f
 pipe_getline	spawn.c	/^char* pipe_getline(SPAWN_PIPE pipes,char* buf,int max_size)$/;"	f
 pipe_printf	spawn.c	/^int pipe_printf(SPAWN_PIPE pipes,const char* format,...)$/;"	f
-query_value	gsoft.c	/^int query_value()$/;"	f
 register_me	gsoft.c	/^int register_me()$/;"	f
-send_msg	gsoft.c	/^int send_msg(SOCKET sock,char* szMsg)$/;"	f
-send_tasklist	gsoft.c	/^int send_tasklist(SOCKET* sock)$/;"	f
+send_msg	gsoft.c	/^static int send_msg (lua_State* L)$/;"	f	file:
 size_	spawn.c	/^	int size_;$/;"	m	struct:_spawn_pipe_	file:
 spawn_child	spawn.c	/^int spawn_child(const char* cmd,SPAWN_PIPE pipes)$/;"	f
-tcp_connect	gsoft.c	/^SOCKET tcp_connect()$/;"	f
-udp_send	gsoft.c	/^SOCKET udp_send()$/;"	f
+tcp_connect	gsoft.c	/^static int tcp_connect(lua_State* L)$/;"	f	file:
+trace_out	g_lua.c	/^int trace_out(lua_State* L)$/;"	f

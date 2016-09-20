@@ -1,5 +1,11 @@
-gsoft.o: gsoft.c spawn.h C:/msys/1.0/include/lua.h \
+g_lua.o: g_lua.c g_lua.h C:/msys/1.0/include/lua.h \
  C:/msys/1.0/include/luaconf.h C:/msys/1.0/include/lualib.h \
  C:/msys/1.0/include/lua.h C:/msys/1.0/include/lauxlib.h \
  C:/msys/1.0/include/trace.h
-spawn.o: spawn.c spawn.h
+gsoft.o: gsoft.c spawn.h C:/msys/1.0/include/lua.h \
+ C:/msys/1.0/include/luaconf.h C:/msys/1.0/include/lualib.h \
+ C:/msys/1.0/include/lua.h C:/msys/1.0/include/lauxlib.h \
+ C:/msys/1.0/include/trace.h g_lua.h
+spawn.o: spawn.c spawn.h C:/msys/1.0/include/lua.h \
+ C:/msys/1.0/include/luaconf.h C:/msys/1.0/include/lualib.h \
+ C:/msys/1.0/include/lua.h C:/msys/1.0/include/lauxlib.h

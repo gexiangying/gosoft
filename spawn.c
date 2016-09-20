@@ -146,19 +146,21 @@ int spawn_child(const char* cmd,SPAWN_PIPE pipes)
 	CloseHandle(child.out);
 	return 1;
 }
-/*
 static int lua_new_pipe(lua_State* L)
 {
 	const char* cmd = lua_tostring(L,1);
 	//TRACE_OUT("lua_new pipe %s\n",cmd);
 	SPAWN_PIPE pipes = (SPAWN_PIPE)lua_newuserdata(L,sizeof(struct _spawn_pipe_));
 	if(!pipes){
-		error(L,"*error* : create pipes !\n");
-		return 1;
+		//error(L,"*error* : create pipes !\n");
+		return 0;
 	}
 	memset(pipes,0,sizeof(struct _spawn_pipe_));
 	if(spawn_child(cmd,pipes) == 0){
-		error(L,"*error* : spawn_child %s !\n",cmd);
+		//error(L,"*error* : spawn_child %s !\n",cmd);
+		lua_pop(L,1);
+		free(pipes);
+		lua_pushnil(L);
 		return 1;
 	}
 	luaL_getmetatable(L,"ge.pipe");
@@ -218,7 +220,6 @@ int luaopen_luaext_pipe(lua_State* L){
 	lua_pushvalue(L,-1);
 	lua_setfield(L,-2,"__index");
 	luaL_register(L,NULL,luapipe_m);
-	luaL_register(L,"luaext.pipe",luapipe_f);
+	luaL_register(L,"pipe",luapipe_f);
 	return 1;
 }
-*/
