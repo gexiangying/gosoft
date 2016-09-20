@@ -17,12 +17,12 @@ static int tcp_connect(lua_State* L)
 	int port;
 	ip = lua_tostring(L,1);
 	port = lua_tointeger(L,2);
-	TRACE_OUT("ip = %s;port = %d\n",ip,port);
+//	TRACE_OUT("ip = %s;port = %d\n",ip,port);
 	char* strip = (char*)malloc(strlen(ip) +1);
 	strcpy(strip,ip);	
 	struct hostent *Server = NULL;
 	Server = gethostbyname(strip);
-	TRACE_OUT("gethostbyname\n");
+//	TRACE_OUT("gethostbyname\n");
 	free(strip);
 	if(Server == NULL){
 		lua_pushnil(L);
@@ -42,7 +42,7 @@ static int tcp_connect(lua_State* L)
 			(char *)Server->h_addr_list[0],
 			Server->h_length);
 	addr.sin_port = htons(port);
-	TRACE_OUT("htons\n");
+//	TRACE_OUT("htons\n");
 	if(SOCKET_ERROR == connect(s,(struct sockaddr *)&addr,sizeof(addr))){
 		lua_pushnil(L);
 		lua_pushnil(L);
