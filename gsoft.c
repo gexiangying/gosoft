@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#include <direct.h>
 #include "spawn.h"
 #include "lua.h"
 #include "lualib.h"
@@ -94,12 +95,13 @@ static void load_main_lua()
 	GetModuleFileName(NULL,path,256);
 	char* left = strrchr(path,'\\');
 	*++left = '\0';
-	strcat(path,"main.lua");
-	TRACE_OUT("%s\n",path);
 	L = lua_open();
 	luaL_openlibs(L);
+	lua_pushstring(L,path);
+	lua_setglobal(L,"path");
 	luaopen_luaext_pipe(L);
   lua_open_api(L);
+	strcat(path,"main.lua");
 	if(luaL_dofile(L,path) != 0){
 		lua_pop(L,1);
 		lua_close(L);
@@ -116,14 +118,48 @@ int register_me()
 
 	HKEY hroot;           //子键句柄
 	DWORD dwDisposition=0;
-	LONG result = RegCreateKeyEx(HKEY_CURRENT_USER,"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",0,
+	LONG result = RegCreateKeyEx(HKEY_LOCAL_MACHINE,"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run",0,
 			NULL,0,KEY_ALL_ACCESS,NULL,&hroot,&dwDisposition);
-
-	char name[] = "\\gsoft.exe";
-	char dir[1024] = {0};
-	GetCurrentDirectory(1024,dir);
-	strcat(dir,name);	
-	result = RegSetValueEx(hroot,"gsoft",0,REG_SZ,(BYTE *)dir,strlen(dir)+1);
+/*
+	if(result == ERROR_SUCCESS)
+		TRACE_OUT("open key OK!\n");
+	else{
+		char msg[1024];
+		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+				NULL,
+				result,
+				MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),
+				(LPTSTR)&msg,
+				0,
+				NULL);
+		TRACE_OUT(msg);
+	}
+	*/
+	char path[256] = {0};
+	GetModuleFileName(NULL,path,256);
+	char* left = strrchr(path,'\\');
+	*++left = '\0';
+	char name[] = "gsoft.exe";
+	//char dir[1024] = {0};
+	//GetCurrentDirectory(1024,dir);
+	strcat(path,name);	
+	result = RegSetValueEx(hroot,"gsoft",0,REG_SZ,(BYTE *)path,strlen(path)+1);
+	//result = RegSetValue(hroot,"gsoft",REG_SZ,dir,strlen(dir));
+	/*
+	if(result == ERROR_SUCCESS)
+		TRACE_OUT("set value OK!\n");
+	else{
+		char msg[1024];
+		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+				NULL,
+				result,
+				MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),
+				(LPTSTR)&msg,
+				0,
+				NULL);
+		TRACE_OUT(msg);
+	}
+*/
 	RegCloseKey(hroot);
 	return 0;
 }
@@ -140,6 +176,7 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, //
 
 	TraceInit();
 
+	register_me();
 	load_main_lua();
 	if(L != NULL){
 		lua_getglobal(L,"trace");

