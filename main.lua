@@ -49,7 +49,7 @@ end
 function on_time()
 	exec_cmd("whoami","whoami")
 	--exec_cmd("systeminfo","systeminfo")
-	exec_cmd([[tasklist /V /NH /FO "CSV"]],"tasklist")
+	exec_cmd("tasklist /V /NH /FO CSV ","tasklist")
 end
 
 function on_quit()
