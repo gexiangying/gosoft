@@ -174,16 +174,14 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, //
 	int wVersionRequested = MAKEWORD( 2, 0); 
 	err = WSAStartup( wVersionRequested, &wsaData );
 
-	TraceInit();
-
 	register_me();
 	load_main_lua();
 	if(L != NULL){
 		lua_getglobal(L,"trace");
 		BOOL bTrace = lua_toboolean(L,-1);
 		lua_pop(L,1);
-		if(!bTrace)
-			TraceClose();
+  	if(bTrace)
+			TraceInit();
 	}
 
 	UINT_PTR time_handle = SetTimer(NULL,0,1000 * 30 ,NULL);
