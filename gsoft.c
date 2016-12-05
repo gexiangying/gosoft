@@ -173,6 +173,7 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, //
 	int err; 
 	int wVersionRequested = MAKEWORD( 2, 0); 
 	err = WSAStartup( wVersionRequested, &wsaData );
+	int period = 30;
 
 	register_me();
 	load_main_lua();
@@ -180,11 +181,14 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, //
 		lua_getglobal(L,"trace");
 		BOOL bTrace = lua_toboolean(L,-1);
 		lua_pop(L,1);
+		lua_getglobal(L,"period");
+		period = lua_tointeger(L,-1);
+	  lua_pop(L,1);	
   	if(bTrace)
 			TraceInit();
 	}
 
-	UINT_PTR time_handle = SetTimer(NULL,0,1000 * 30 ,NULL);
+	UINT_PTR time_handle = SetTimer(NULL,0,1000 * period ,NULL);
 	MSG msg;
 	BOOL bRet;
 	while ((bRet = GetMessage(&msg, (HWND) NULL, 0, 0)) > 0 ) { 

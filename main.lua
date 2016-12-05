@@ -1,6 +1,7 @@
 package.path = path .. "?.lua"
 require("config")
 trace = config.trace
+period = config.period or 30
 
 local flag,s  = tcp_connect(config.ip,config.port)
 
