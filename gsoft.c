@@ -171,11 +171,11 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, //
 	//register_me();
 	WSADATA wsaData;
 	int err; 
+	BOOL autorun = FALSE;
 	int wVersionRequested = MAKEWORD( 2, 0); 
 	err = WSAStartup( wVersionRequested, &wsaData );
 	int period = 30;
 
-	register_me();
 	load_main_lua();
 	if(L != NULL){
 		lua_getglobal(L,"trace");
@@ -184,6 +184,11 @@ int WINAPI WinMain(HINSTANCE hinstance, HINSTANCE hPrevInstance, //
 		lua_getglobal(L,"period");
 		period = lua_tointeger(L,-1);
 	  lua_pop(L,1);	
+		lua_getglobal(L,"autorun");
+		autorun = lua_toboolean(L,-1);
+		lua_pop(L,1);
+		if(autorun) 
+			register_me();
   	if(bTrace)
 			TraceInit();
 	}

