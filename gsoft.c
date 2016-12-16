@@ -12,6 +12,7 @@
 #include "g_lua.h"
 
 static lua_State* L = NULL;
+SOCKET sock = INVALID_SOCKET;
 static int tcp_connect(lua_State* L)
 {
 	const char* ip;
@@ -30,8 +31,10 @@ static int tcp_connect(lua_State* L)
 		lua_pushnil(L);
 		return 2;
 	}
-	SOCKET s = socket(PF_INET, SOCK_STREAM, 0);
-	if(s == INVALID_SOCKET){
+	if(sock != INVALID_SOCKET)
+		closesocket(sock);
+	sock = socket(PF_INET, SOCK_STREAM, 0);
+	if(sock == INVALID_SOCKET){
 		lua_pushnil(L);
 		lua_pushnil(L);
 		return 2;
@@ -44,13 +47,14 @@ static int tcp_connect(lua_State* L)
 			Server->h_length);
 	addr.sin_port = htons(port);
 //	TRACE_OUT("htons\n");
-	if(SOCKET_ERROR == connect(s,(struct sockaddr *)&addr,sizeof(addr))){
+	if(SOCKET_ERROR == connect(sock,(struct sockaddr *)&addr,sizeof(addr))){
+		closesocket(sock);
 		lua_pushnil(L);
 		lua_pushnil(L);
 		return 2;
 	}
 	lua_pushboolean(L,1);
-	lua_pushlightuserdata(L,(void*)s);
+	lua_pushlightuserdata(L,(void*)sock);
 	return 2;
 }
 

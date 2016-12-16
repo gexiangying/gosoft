@@ -42,6 +42,7 @@ pipe_printf	spawn.c	/^int pipe_printf(SPAWN_PIPE pipes,const char* format,...)$/
 register_me	gsoft.c	/^int register_me()$/;"	f
 send_msg	gsoft.c	/^static int send_msg (lua_State* L)$/;"	f	file:
 size_	spawn.c	/^	int size_;$/;"	m	struct:_spawn_pipe_	file:
+sock	gsoft.c	/^SOCKET sock = INVALID_SOCKET;$/;"	v
 spawn_child	spawn.c	/^int spawn_child(const char* cmd,SPAWN_PIPE pipes)$/;"	f
 tcp_connect	gsoft.c	/^static int tcp_connect(lua_State* L)$/;"	f	file:
 trace_out	g_lua.c	/^int trace_out(lua_State* L)$/;"	f
