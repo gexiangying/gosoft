@@ -1,0 +1,31 @@
+/* 
+ * Copyright (C) 2017-present gexiangying
+ * All rights reserved.
+ *
+ * gexiangying grants to you a limited, non-transferable and non-exclusive right to use, royalty-free, copy and redistribute the software.
+ *
+ * The licensee has the right to use the software for a non-profit projects/sites. There are no 
+ * limitations on the number of non-profit   *projects/sites you can use the software in, you can
+ * use it on any number of non-profit projects/sites you need. There is no time limit, you can
+ * use the software for any period of time you need. There is no restriction while you are 
+ * developing your solution. There are no royalties  of any kind involved.
+ *
+ * The governmental entities are not allowed to use this freeware license.
+ *
+ * The licensee is allowed to copy and redistribute the software but you may not:
+ * a) Distribute the modified software or part(s) of it as a standalone application.
+ * b) Sublicense, rent, lease or lend any portion of the software as a standalone application.
+ * c) Modify or remove any copyright notices from any of the software files.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
